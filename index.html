@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Intention Timer</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.google.com/specimen/Montserrat?query=mont&selection.family=Montserrat:300,400" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <p class="header-title">Intention Timer</p>
+    </header>
+    <main>
+      <section class="left-section">
+        <p class="left-title">New Activity</p>
+        <section class="content-section">
+          <p class="select-category">Select a category:</p>
+          <div class="category-button-section">
+            <button class="category-button">
+              <!-- add in image sources  -->
+              <img src="..." alt="lightbulb over book">
+              <br>Study
+            </button>
+            <button class="category-button">
+              <img src="..." alt="flower">
+              <br>Meditate
+            </button>
+            <button class="category-button">
+              <img src="..." alt="tennis shoe">
+              <br>Exercise
+            </button>
+          </div>
+          <form>
+            <div class="goal-div">
+              <label for="goal">What would you like to accomplish during this time?</label>
+              <input class="goal-input" type="text" name="goal">
+            </div>
+          </form>
+        </section>
+      </section>
+      <section class="right-section">
+        <p class="activities-title">Past Activities</p>
+        <p class="no-activities-text">You haven't logged any activities yet.<br>Complete the form to the left to get started!</p>
+        <div class="activities-list hidden"></div>
+      </section>
+    </main>
+    <script src="main.js"></script>
+    <script src="Activity.js"></script>
+  </body>
+
+</html>
