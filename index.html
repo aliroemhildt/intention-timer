@@ -1,75 +1,75 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>Intention Timer</title>
-    <link rel="stylesheet" href="./styles.css">
-    <link href="https://fonts.google.com/specimen/Montserrat?query=mont&selection.family=Montserrat:300,400" rel="stylesheet">
-  </head>
+<head>
+  <title>Intention Timer</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link href="https://fonts.google.com/specimen/Montserrat?query=mont&selection.family=Montserrat:300,400" rel="stylesheet">
+</head>
 
-  <body>
-    <header>
-      <p class="header-title">Intention Timer</p>
-    </header>
-    <main>
-      <section class="left-section">
-        <p class="left-title">New Activity</p>
-        <section class="choose-category-view">
-          <p class="select-category">Select a category:</p>
-          <div class="category-button-section">
-            <button class="category-button">
-              <!-- add in image sources  -->
-              <img src="..." alt="lightbulb over book">
-              <br>Study
-            </button>
-            <button class="category-button">
-              <img src="..." alt="flower">
-              <br>Meditate
-            </button>
-            <button class="category-button">
-              <img src="..." alt="tennis shoe">
-              <br>Exercise
-            </button>
+<body>
+  <header>
+    <p class="header-title">INTENTION TIMER</p>
+  </header>
+  <main>
+    <section class="left-section">
+      <p class="left-title">New Activity</p>
+      <section class="choose-category-view">
+        <p class="select-category">Select a category:</p>
+        <div class="category-button-section">
+          <button class="category-button">
+            <!-- add in image sources  -->
+            <img src="..." alt="lightbulb over book">
+            <br>Study
+          </button>
+          <button class="category-button">
+            <img src="..." alt="flower">
+            <br>Meditate
+          </button>
+          <button class="category-button">
+            <img src="..." alt="tennis shoe">
+            <br>Exercise
+          </button>
+        </div>
+        <form>
+          <div class="goal-div">
+            <label for="goal">What would you like to accomplish during this time?</label>
+            <input class="goal-input" type="text" name="goal">
           </div>
-          <form>
-            <div class="goal-div">
-              <label for="goal">What would you like to accomplish during this time?</label>
-              <input class="goal-input" type="text" name="goal">
+          <div class="time-div">
+            <div class="mins-div">
+              <label for="minutes">Minutes</label>
+              <input class="mins-input" type="text" name="minutes">
             </div>
-            <div class="time-div">
-              <div class="mins-div">
-                <label for="minutes">Minutes</label>
-                <input class="mins-input" type="text" name="minutes">
-              </div>
-              <div class="secs-div">
-                <label for="seconds">Seconds</label>
-                <input class="secs-input" type="text" name="seconds">
-              </div>
+            <div class="secs-div">
+              <label for="seconds">Seconds</label>
+              <input class="secs-input" type="text" name="seconds">
             </div>
-            <div class="start-button-div">
-              <button class="start-activity-button">START ACTIVITY</button>
-            </div>
-          </form>
-        </section>
-        <section class="timer-view hidden">
-          <p class="activity-name">User goal input</p>
-          <p class="timer-text">00:00</p>
-          <button class="start-complete-button">START</button>
-          <button class="log-activity-button hidden">LOG ACTIVITY</button>
-        </section>
-        <section class="completed-view hidden">
-          <button class="create-new-activity-button">CREATE A NEW ACTIVITY</button>
-        </section>
+          </div>
+          <div class="start-button-div">
+            <button class="start-activity-button">START ACTIVITY</button>
+          </div>
+        </form>
       </section>
-      <section class="right-section">
-        <p class="activities-title">Past Activities</p>
-        <p class="no-activities-text">You haven't logged any activities yet.<br>Complete the form to the left to get started!</p>
-        <div class="activities-list hidden"></div>
+      <section class="timer-view hidden">
+        <p class="activity-name">User goal input</p>
+        <p class="timer-text">00:00</p>
+        <button class="start-complete-button">START</button>
+        <button class="log-activity-button hidden">LOG ACTIVITY</button>
       </section>
-    </main>
-    <script src="main.js"></script>
-    <script src="Activity.js"></script>
-  </body>
+      <section class="completed-view hidden">
+        <button class="create-new-activity-button">CREATE A NEW ACTIVITY</button>
+      </section>
+    </section>
+    <section class="right-section">
+      <p class="activities-title">Past Activities</p>
+      <p class="no-activities-text">You haven't logged any activities yet.<br>Complete the form to the left to get started!</p>
+      <div class="activities-list hidden"></div>
+    </section>
+  </main>
+  <script src="main.js"></script>
+  <script src="Activity.js"></script>
+</body>
 
 </html>
 
