@@ -47,6 +47,8 @@ main {
   border-style: dashed;
   height: 100vh;
   padding: 20px;
+  color: #FFF;
+  font-weight: 400;
 }
 
 .left-title {
@@ -64,6 +66,71 @@ main {
   height: 93vh;
   border-radius: 5px;
   box-shadow: 5px 5px 1px 1px #26222D;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.category-button-section {
+  width: 75%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.select-category {
+  padding: 20px 0 0 0;
+  width: 75%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0 0 0;
+  width: 75%;
+}
+
+.goal-div, .mins-div, .secs-div {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0 0 0;
+}
+
+.goal-div {
+  width: 100%;
+}
+
+.goal {
+  border-color: white;
+  border-style: dashed;
+}
+
+.goal-input, .mins-input, .secs-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #FFF;
+  margin-top: 5px;
+}
+
+.time-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mins-div, .secs-div {
+  width: 40%;
+}
+
+.start-button-div {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.start-activity-button {
+  margin: 25px;
 }
 
 .right-section {
