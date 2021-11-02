@@ -20,8 +20,6 @@ body {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
   min-height: 100%;
-  border-color: orange;
-  border-style: dashed;
 }
 
 header {
@@ -31,8 +29,6 @@ header {
 .header-title {
   margin: 0px;
   padding: 10px;
-  border-color: yellow;
-  border-style: dashed;
   color: #FFF;
   text-align: center;
 }
@@ -43,33 +39,29 @@ main {
 
 .left-section {
   flex-grow: 2;
-  border-color: yellow;
-  border-style: dashed;
   height: 100vh;
-  padding: 20px;
   color: #FFF;
   font-weight: 400;
 }
 
-.left-title {
+.title {
   padding: 0px;
-  border-color: yellow;
-  border-style: dashed;
-  color: #FFF;
+  color: #CBC9CF;
   font-weight: 300;
   font-size: 20px;
-  margin: 0;
+  margin: 20px 20px 10px 20px;
 }
 
 .choose-category-view {
   background-color: #46424D;
-  height: 93vh;
+  height: 80%;
   border-radius: 5px;
   box-shadow: 5px 5px 1px 1px #26222D;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin: 0px 20px 0px 20px;
 }
 
 .category-button-section {
@@ -99,11 +91,6 @@ form {
 
 .goal-div {
   width: 100%;
-}
-
-.goal {
-  border-color: white;
-  border-style: dashed;
 }
 
 .goal-input, .mins-input, .secs-input {
@@ -137,9 +124,18 @@ form {
   flex-grow: 1;
   border-left: 2px solid;
   border-color: #46424D;
-  border-color: yellow;
-  border-style: dashed;
   height: 100vh;
+}
+
+.activities-title, .no-activities-text {
+  margin: 20px;
+}
+
+.no-activities-text {
+  text-align: center;
+  color: #CBC9CF;
+  font-weight: 300;
+  font-size: 12px;
 }
 
 .hidden {
