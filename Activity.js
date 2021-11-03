@@ -18,3 +18,5 @@ class Activity {
 };
 
 module.exports = Activity;
+
+//completed activity
