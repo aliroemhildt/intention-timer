@@ -52,7 +52,7 @@ main {
   margin: 20px 20px 10px 20px;
 }
 
-.choose-category-view {
+.choose-category-view, .timer-view, .completed-view {
   background-color: #46424D;
   height: 80%;
   border-radius: 5px;
@@ -66,6 +66,7 @@ main {
 
 .category-button-section {
   width: 75%;
+  height: 100px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -136,6 +137,63 @@ form {
   color: #CBC9CF;
   font-weight: 300;
   font-size: 12px;
+}
+
+.category-button {
+  height: 60px;
+  width: 160px;
+  background-color: #46424D;
+  border-color: #FFF;
+  border-style: solid;
+  color: #FFF;
+  border-radius: 5px;
+  border-width: 1.5px;
+}
+
+#image {
+  height: 30px;
+  width: 30px;
+}
+
+.timer-text {
+  font-size: 75px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.activity-name {
+  margin: 30px 0px 0px 0px;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.start-complete-button {
+  border-radius: 50%;
+  height: 175px;
+  width: 175px;
+  display: block;
+  margin: 50px 0px 50px 0px;
+  background-color: #46424D;
+  border-style: solid;
+  border-color: #C278FD;
+  color: #FFF;
+  font-size: 18px;
+}
+
+.square-button {
+  color: #46424D;
+  font-size: 12px;
+  padding: 5px;
+}
+
+.log-activity-button {
+  margin: 10px;
+  width: 150px;
+}
+
+.create-new-activity-button {
+  margin: 60px 0 0 0;
+  width: 275px;
 }
 
 .hidden {
