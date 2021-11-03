@@ -13,21 +13,20 @@
   </header>
   <main>
     <section class="left-section">
-      <p class="left-title">New Activity</p>
-      <section class="choose-category-view">
+      <p class="title">New Activity</p>
+      <section class="choose-category-view hidden">
         <p class="select-category">Select a category:</p>
         <div class="category-button-section">
           <button class="category-button">
-            <!-- add in image sources  -->
-            <img src="..." alt="lightbulb over book">
+            <img src="assets/study.svg" alt="lightbulb over book" id="image">
             <br>Study
           </button>
           <button class="category-button">
-            <img src="..." alt="flower">
+            <img src="assets/meditate.svg" alt="flower" id="image">
             <br>Meditate
           </button>
           <button class="category-button">
-            <img src="..." alt="tennis shoe">
+            <img src="assets/exercise.svg" alt="tennis shoe" id="image">
             <br>Exercise
           </button>
         </div>
@@ -47,7 +46,7 @@
             </div>
           </div>
           <div class="start-button-div">
-            <button class="start-activity-button">START ACTIVITY</button>
+            <button class="start-activity-button square-button">START ACTIVITY</button>
           </div>
         </form>
       </section>
@@ -55,14 +54,14 @@
         <p class="activity-name">User goal input</p>
         <p class="timer-text">00:00</p>
         <button class="start-complete-button">START</button>
-        <button class="log-activity-button hidden">LOG ACTIVITY</button>
+        <button class="log-activity-button square-button hidden">LOG ACTIVITY</button>
       </section>
-      <section class="completed-view hidden">
-        <button class="create-new-activity-button">CREATE A NEW ACTIVITY</button>
+      <section class="completed-view">
+        <button class="create-new-activity-button square-button">CREATE A NEW ACTIVITY</button>
       </section>
     </section>
     <section class="right-section">
-      <p class="activities-title">Past Activities</p>
+      <p class="title">Past Activities</p>
       <p class="no-activities-text">You haven't logged any activities yet.<br>Complete the form to the left to get started!</p>
       <div class="activities-list hidden"></div>
     </section>
