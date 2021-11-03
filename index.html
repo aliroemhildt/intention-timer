@@ -14,18 +14,18 @@
   <main>
     <section class="left-section">
       <p class="title">New Activity</p>
-      <section class="choose-category-view hidden">
+      <section class="choose-category-view">
         <p class="select-category">Select a category:</p>
         <div class="category-button-section">
-          <button class="category-button">
+          <button class="category-button" id="study" >
             <img src="assets/study.svg" alt="lightbulb over book" id="image">
             <br>Study
           </button>
-          <button class="category-button">
+          <button class="category-button" id="meditate">
             <img src="assets/meditate.svg" alt="flower" id="image">
             <br>Meditate
           </button>
-          <button class="category-button">
+          <button class="category-button" id="exercise">
             <img src="assets/exercise.svg" alt="tennis shoe" id="image">
             <br>Exercise
           </button>
@@ -56,7 +56,7 @@
         <button class="start-complete-button">START</button>
         <button class="log-activity-button square-button hidden">LOG ACTIVITY</button>
       </section>
-      <section class="completed-view">
+      <section class="completed-view hidden">
         <button class="create-new-activity-button square-button">CREATE A NEW ACTIVITY</button>
       </section>
     </section>
@@ -89,7 +89,7 @@
       </div>
     </section>
   </main>
-  <script src="main.js"></script>
+  <script type="text/javascript" src="main.js"></script>
   <script src="Activity.js"></script>
 </body>
 
