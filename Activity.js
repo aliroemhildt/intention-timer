@@ -16,5 +16,3 @@ class Activity {
 
   saveToStorage() {};
 };
-
-module.exports = Activity;

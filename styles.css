@@ -150,6 +150,22 @@ form {
   border-width: 1.5px;
 }
 
+.study-button-clicked {
+  border-color: #B3FD78;
+  color: #B3FD78;
+}
+
+.meditate-button-clicked {
+  border-color: #C278FD;
+  color: #C278FD;
+}
+
+.exercise-button-clicked {
+  border-color: #FD8078;
+  color: #FD8078;
+}
+
+
 #image {
   height: 30px;
   width: 30px;
