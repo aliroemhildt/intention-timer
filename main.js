@@ -7,37 +7,85 @@ var studyButton = document.querySelector("#study");
 var meditateButton = document.querySelector("#meditate");
 var exerciseButton = document.querySelector("#exercise");
 var categorySection = document.querySelector(".category-button-section")
+var studyImage = document.querySelector("#study-image");
+var meditateImage = document.querySelector("#meditate-image");
+var exerciseImage = document.querySelector("#exercise-image");
 
+var studyButtonState = false;
+var meditateButtonState = false;
+var exerciseButtonState = false;
 
 categorySection.addEventListener("click", changeButtonColor);
 
 function changeButtonColor(event) {
   var selectedButton = event.target;
-  changeBorderColor(selectedButton);
+  if (selectedButton.id === "study") {
+      toggleStudyButton();
+      meditateButtonState = false;
+      exerciseButtonState = false;
+  };
+  if (selectedButton.id == "meditate") {
+    toggleMeditateButton();
+    studyButtonState = false;
+    exerciseButtonState = false;
+  };
+  if (selectedButton.id === "exercise") {
+    toggleExerciseButton();
+    var studyButtonState = false;
+    var meditateButtonState = false;
+  };
 };
 
-// need to refactor this, could probably use a for loop
-function changeBorderColor(element) {
-  if (element.id === "study") {
-    element.classList.add("study-button-clicked");
-    element.innerHTML = `<img src="assets/study-active.svg" alt="lightbulb over book" id="image"><br>Study`;
-    meditateButton.classList.remove("meditate-button-clicked");
-    meditateButton.innerHTML = `<img src="assets/meditate.svg" alt="flower" id="image"><br>Meditate`;
-    exerciseButton.classList.remove("exercise-button-clicked");
-    exerciseButton.innerHTML = `<img src="assets/exercise.svg" alt="tennis shoe" id="image"><br>Exercise`;
-  } else if (element.id === "meditate") {
-    element.classList.add("meditate-button-clicked");
-    element.innerHTML = `<img src="assets/meditate-active.svg" alt="flower" id="image"><br>Meditate`;
+function toggleStudyButton() {
+  if (studyButtonState) {
     studyButton.classList.remove("study-button-clicked");
-    studyButton.innerHTML = `<img src="assets/study.svg" alt="lightbulb over book" id="image"><br>Study`;
-    exerciseButton.classList.remove("exercise-button-clicked");
-    exerciseButton.innerHTML = `<img src="assets/exercise.svg" alt="tennis shoe" id="image"><br>Exercise`;
-  } else if (element.id === "exercise") {
-    element.classList.add("exercise-button-clicked")
-    element.innerHTML = `<img src="assets/exercise-active.svg" alt="tennis shoe" id="image"><br>Exercise`;
-    studyButton.classList.remove("study-button-clicked");
-    studyButton.innerHTML = `<img src="assets/study.svg" alt="lightbulb over book" id="image"><br>Study`;
+    studyImage.src = "assets/study.svg";
+    studyButtonState = false;
+  } else {
+    studyButton.classList.add("study-button-clicked");
+    studyImage.src = "assets/study-active.svg";
+    studyButtonState = true;
+    if (meditateButtonState) {
+      toggleMeditateButton();
+    };
+    if (exerciseButtonState) {
+      toggleExerciseButton();
+    };
+  };
+};
+
+function toggleMeditateButton() {
+  if (meditateButtonState) {
     meditateButton.classList.remove("meditate-button-clicked");
-    meditateButton.innerHTML = `<img src="assets/meditate.svg" alt="flower" id="image"><br>Meditate`;
+    meditateImage.src = "assets/meditate.svg";
+    meditateButtonState = false;
+  } else {
+    meditateButton.classList.add("meditate-button-clicked");
+    meditateImage.src = "assets/meditate-active.svg";
+    meditateButtonState = true;
+    if (studyButtonState) {
+      toggleStudyButton();
+    };
+    if (exerciseButtonState) {
+      toggleExerciseButton();
+    };
+  };
+};
+
+function toggleExerciseButton() {
+  if (exerciseButtonState) {
+    exerciseButton.classList.remove("exercise-button-clicked");
+    exerciseImage.src = "assets/exercise.svg";
+    exerciseButtonState = false;
+  } else {
+    exerciseButton.classList.add("exercise-button-clicked");
+    exerciseImage.src = "assets/exercise-active.svg";
+    exerciseButtonState = true;
+    if (studyButtonState) {
+      toggleStudyButton();
+    };
+    if (meditateButtonState) {
+      toggleMeditateButton();
+    };
   };
 };
