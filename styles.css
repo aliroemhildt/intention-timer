@@ -233,9 +233,20 @@ form {
   margin: 50px 0px 50px 0px;
   background-color: #46424D;
   border-style: solid;
-  border-color: #C278FD;
   color: #FFF;
   font-size: 18px;
+}
+
+.exercise-border {
+  border-color: #FD8078;
+}
+
+.meditate-border {
+  border-color: #C278FD;
+}
+
+.study-border {
+  border-color: #B3FD78;
 }
 
 .square-button {

@@ -1,4 +1,4 @@
-
+//  QUERY SELECTORS
 var studyButton = document.querySelector("#study");
 var meditateButton = document.querySelector("#meditate");
 var exerciseButton = document.querySelector("#exercise");
@@ -19,15 +19,17 @@ var goalError = document.querySelector(".error-goal");
 var minutesError = document.querySelector(".error-minutes");
 var secondsError = document.querySelector(".error-seconds");
 var buttonError = document.querySelector(".error-button");
+var startCompleteButton = document.querySelector(".start-complete-button");
+var activityTitle = document.querySelector(".title");
 
+// GLOBAL VARIABLES
 var categoryElements = {study:{button: studyButton, image: studyImage},
                         meditate:{button:meditateButton, image: meditateImage},
                         exercise:{button:exerciseButton, image:exerciseImage}};
-
 var currentActivatedCategory = "";
 var currentActivity;
 
-
+// EVENT LISTENERS
 studyButton.addEventListener("click", function(){
   setCategory("study")
 });
@@ -42,6 +44,7 @@ startActivityButton.addEventListener("click", function(event) {
   startActivity();
 });
 
+// FUNCTIONS
 function setCategory(selectedCategory) {
   if (currentActivatedCategory !== "") {
     deactivateCategory(currentActivatedCategory);
@@ -86,6 +89,8 @@ function startActivity() {
     currentActivity = new Activity(currentActivatedCategory, goalInput.value, parseInt(minsInput.value), parseInt(secsInput.value));
     timerText.innerText = `${currentActivity.minutes}:${currentActivity.seconds.toString().padStart(2, "0")}`;
     activityName.innerText = `${goalInput.value}`;
+    changeButtonBorder();
+    activityTitle.innerText = "Current Activity";
   } else {
     showInputError();
   };
@@ -106,4 +111,10 @@ function showInputError() {
   } else {
     addErrorHidden(buttonError);
   };
+};
+
+function changeButtonBorder() {
+  console.log(currentActivity);
+  var activity = currentActivity.category;
+  startCompleteButton.classList.add(`${activity}-border`);
 };
