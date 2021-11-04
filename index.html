@@ -34,16 +34,52 @@
         <form>
           <div class="goal-div">
             <label for="goal">What would you like to accomplish during this time?</label>
-            <input class="goal-input" type="text" name="goal">
+            <input class="goal-input" type="text" name="goal" require="required">
+            <div class="error-message error-hidden">
+              <image class="warning-image" src="assets/warning.svg" alt="triangle">
+              <span>A description is required</span>
+            </div>
           </div>
           <div class="time-div">
-            <div class="mins-div">
-              <label for="minutes">Minutes</label>
-              <input class="mins-input" type="text" name="minutes">
+            <div class="time-div-left">
+              <div class="mins-div">
+                <label for="minutes">Minutes</label>
+                <input
+                class="mins-input"
+                type="number"
+                min="0"
+                max="240"
+                step="1"
+                oninput="validity.valid || (value= this.previousValue)"
+                onfocus="this.previousValue = this.value"
+                onkeydown="this.previousValue = this.value"
+                name="minutes"
+                require="required">
+              </div>
+              <div class="error-message error-hidden">
+                <image class="warning-image" src="assets/warning.svg" alt="triangle">
+                <span>Please enter valid minutes</span>
+              </div>
             </div>
-            <div class="secs-div">
-              <label for="seconds">Seconds</label>
-              <input class="secs-input" type="text" name="seconds">
+            <div class="time-div-right">
+              <div class="secs-div">
+                <label for="seconds">Seconds</label>
+                <input
+                  class="secs-input"
+                  type="number"
+                  min="1"
+                  max="59"
+                  step="1"
+                  oninput="validity.valid || (value= this.previousValue)"
+                  onfocus="this.previousValue = this.value"
+                  onkeydown="this.previousValue = this.value"
+                  name="seconds"
+                  require="required">
+              </div>
+              <div class="error-message error-hidden">
+                <image class="warning-image" src="assets/warning.svg" alt="triangle">
+                <span>Please enter valid seconds</span>
+              </div>
             </div>
           </div>
           <div class="start-button-div">
