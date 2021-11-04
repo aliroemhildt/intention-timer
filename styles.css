@@ -19,7 +19,8 @@ body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
-  min-height: 100%;
+  /* min-height: 100vh; */
+  /* overflow: hidden; */
 }
 
 header {
@@ -166,7 +167,7 @@ form {
 }
 
 
-#image {
+.image {
   height: 30px;
   width: 30px;
 }
