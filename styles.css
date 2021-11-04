@@ -95,12 +95,13 @@ form {
   width: 100%;
 }
 
-.goal-input, .mins-input, .secs-input {
+.input {
   background: transparent;
   border: none;
   border-bottom: 1px solid #FFF;
   margin-top: 8px;
   margin-bottom: 8px;
+  color: white;
 }
 
 .error-message {
