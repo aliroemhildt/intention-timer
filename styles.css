@@ -69,8 +69,17 @@ main {
   width: 75%;
   height: 100px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-div {
+  width: 100%;
+  display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .select-category {
@@ -142,6 +151,11 @@ form {
 .start-activity-button {
   margin-top: 60px;
   width: 25%;
+}
+
+.start-activity-disabled:disabled,
+.start-activity-disabled[disabled] {
+  opacity: 0.3;
 }
 
 .right-section {

@@ -18,6 +18,7 @@ var activityName = document.querySelector(".activity-name");
 var goalError = document.querySelector(".error-goal");
 var minutesError = document.querySelector(".error-minutes");
 var secondsError = document.querySelector(".error-seconds");
+var buttonError = document.querySelector(".error-button");
 
 var categoryElements = {study:{button: studyButton, image: studyImage},
                         meditate:{button:meditateButton, image: meditateImage},
@@ -36,31 +37,38 @@ meditateButton.addEventListener("click", function(){
 exerciseButton.addEventListener("click", function(){
   setCategory("exercise")
 });
+startActivityButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  startActivity();
+});
 
 function setCategory(selectedCategory) {
   if (currentActivatedCategory !== "") {
     deactivateCategory(currentActivatedCategory);
-  }
+  };
   activateCategory(selectedCategory);
   currentActivatedCategory = selectedCategory;
-}
+};
 
 function deactivateCategory(category){
   var currCategory = categoryElements[category];
   currCategory.button.classList.remove(`${category}-button-clicked`);
   currCategory.image.src = `assets/${category}.svg`;
-}
+};
 
 function activateCategory(category){
   var currCategory = categoryElements[category];
   console.log(category, currCategory);
   currCategory.button.classList.add(`${category}-button-clicked`);
   currCategory.image.src = `assets/${category}-active.svg`;
-}
-
+};
 
 function addHidden(element) {
   element.classList.add('hidden');
+};
+
+function addErrorHidden(element) {
+  element.classList.add('error-hidden');
 };
 
 function removeHidden(element) {
@@ -76,7 +84,6 @@ function startActivity() {
     addHidden(chooseCatViewPage);
     removeHidden(timerViewPage);
     currentActivity = new Activity(currentActivatedCategory, goalInput.value, parseInt(minsInput.value), parseInt(secsInput.value));
-    console.log(currentActivity);
     timerText.innerText = `${currentActivity.minutes}:${currentActivity.seconds.toString().padStart(2, "0")}`;
     activityName.innerText = `${goalInput.value}`;
   } else {
@@ -89,13 +96,14 @@ function showInputError() {
   var errorElements = [goalError, minutesError, secondsError];
   for (var i = 0; i < inputElements.length; i++) {
     if (inputElements[i].value === ''){
-      console.log(inputElements[0]);
       removeErrorHidden(errorElements[i]);
-    };
+    } else {
+      addErrorHidden(errorElements[i])
+    }
+  };
+  if (!currentActivatedCategory) {
+    removeErrorHidden(buttonError);
+  } else {
+    addErrorHidden(buttonError);
   };
 };
-
-startActivityButton.addEventListener("click", function(event) {
-  event.preventDefault();
-  startActivity();
-});
