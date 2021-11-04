@@ -99,7 +99,13 @@ form {
   background: transparent;
   border: none;
   border-bottom: 1px solid #FFF;
-  margin-top: 5px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.error-message {
+  color: #EFB7EC;
+  font-size: 12px;
 }
 
 .time-div {
@@ -108,8 +114,22 @@ form {
   justify-content: space-between;
 }
 
+.time-div-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-right: 20px;
+}
+
+.time-div-right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 20px;
+}
+
 .mins-div, .secs-div {
-  width: 40%;
+  width: 100%;
 }
 
 .start-button-div {
@@ -119,7 +139,8 @@ form {
 }
 
 .start-activity-button {
-  margin: 25px;
+  margin-top: 60px;
+  width: 25%;
 }
 
 .right-section {
@@ -172,6 +193,11 @@ form {
   width: 30px;
 }
 
+.warning-image {
+  height: 15px;
+  width: 15px;
+}
+
 .timer-text {
   font-size: 75px;
   margin: 0;
@@ -199,7 +225,7 @@ form {
 
 .square-button {
   color: #46424D;
-  font-size: 12px;
+  font-size: 15px;
   padding: 5px;
 }
 
@@ -271,4 +297,8 @@ form {
   width: 5px;
   margin: 10px 15px 0 0;
   border-radius: 5px;
+}
+
+.error-hidden {
+  visibility: hidden;
 }

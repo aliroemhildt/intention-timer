@@ -1,8 +1,4 @@
-// Category Buttons
-// 1. add EventListener to all Buttons
-//    - when clicked: border color changes, image changes to colored version
-// function will add new class to button (specific class for each button)
-//   - reassign innerHTML with new img url
+
 var studyButton = document.querySelector("#study");
 var meditateButton = document.querySelector("#meditate");
 var exerciseButton = document.querySelector("#exercise");
