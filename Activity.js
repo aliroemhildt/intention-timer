@@ -8,7 +8,10 @@ class Activity {
     this.id = Date.now();
   };
 
-  startTimer() {};
+  startTimer() {
+    startTime = Date.now();
+    updateTimer();
+  };
 
   markComplete() {
     this.completed = true;
