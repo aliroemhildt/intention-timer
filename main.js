@@ -51,7 +51,31 @@ startActivityButton.addEventListener("click", function(event) {
 
 startCompleteButton.addEventListener("click", startTimer);
 
-startCompleteButton.addEventListener("click", pressStart);
+function startTimer() {
+  startTime = Date.now();
+  updateTimer();
+}
+
+function updateTimer(){
+  var currentTime = Date.now();
+  var elapsedTime = currentTime - startTime;
+  var overAllDuration = (currentActivity.minutes * 60 + currentActivity.seconds) * 1000;
+  var remainingDuration = overAllDuration - elapsedTime;
+  if (remainingDuration <= 0) {
+    window.alert("time up");
+    return;
+  }
+  var remainingSeconds = Math.floor(remainingDuration / 1000);
+  var minutesComponent = Math.floor(remainingSeconds / 60);
+  var secondsComponent = Math.floor(remainingSeconds % 60);
+  renderTimer(minutesComponent, secondsComponent);
+  window.requestAnimationFrame(updateTimer)
+}
+
+function renderTimer(minutes, seconds){
+  timerText.innerText = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
+// startCompleteButton.addEventListener("click", pressStart);
 
 // FUNCTIONS
 function setCategory(selectedCategory) {
@@ -96,7 +120,7 @@ function startActivity() {
     addHidden(chooseCatViewPage);
     removeHidden(timerViewPage);
     currentActivity = new Activity(currentActivatedCategory, goalInput.value, parseInt(minsInput.value), parseInt(secsInput.value));
-    timerText.innerText = `${currentActivity.minutes}:${currentActivity.seconds.toString().padStart(2, "0")}`;
+    renderTimer(currentActivity.minutes, currentActivity.seconds);
     activityName.innerText = `${goalInput.value}`;
     changeButtonBorder();
     activityTitle.innerText = "Current Activity";
@@ -128,40 +152,40 @@ function changeButtonBorder() {
   startCompleteButton.classList.add(`${activity}-border`);
 };
 
-function pressStart() {
-  startTime = Date.now();
-  updateTimer = setInterval(startTimer, 1000);
-  startCompleteButton.innerText = '';
-};
-
-function startTimer() {
-  var currentTime = Date.now();
-  var inputTimeMilliseconds = (currentActivity.minutes * 60 * 1000) + (currentActivity.seconds * 1000);
-  var elapsedTimeMilliseconds = Math.abs(currentTime-startTime);
-  var timerUpdate = inputTimeMilliseconds - elapsedTimeMilliseconds;
-  console.log(timerUpdate);
-  var minutes = Math.floor(timerUpdate % (1000 * 60 * 60) / (1000 * 60));
-  var seconds = Math.floor((timerUpdate % (1000 * 60)) / 1000);
-  console.log(minutes);
-  console.log(seconds);
-  displayTime();
-  if (timerUpdate === -1) {
-    clearInterval(updateTimer);
-    timerText.innerText = "00:00";
-    startCompleteButton.innerText = 'COMPLETE!';
-    window.alert("Time's up!");
-  };
-};
-
-function displayTime() {
-  if (minutes < 10 && seconds > 10) {
-    timerText.innerText = `${minutes.toString().padStart(2,"0")}:${seconds.toString()}`;
-    console.log(timerText);
-  } else if (minutes < 10 && seconds < 10) {
-    timerText.innerText = `${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`
-    console.log(timerText);
-  } else {
-    timerText.innerText = `${minutes.toString()}:${seconds.toString()}`;
-    console.log(timerText);
-  };
-};
+// function pressStart() {
+//   startTime = Date.now();
+//   updateTimer = setInterval(startTimer, 1000);
+//   startCompleteButton.innerText = '';
+// };
+//
+// function startTimer() {
+//   var currentTime = Date.now();
+//   var inputTimeMilliseconds = (currentActivity.minutes * 60 * 1000) + (currentActivity.seconds * 1000);
+//   var elapsedTimeMilliseconds = Math.abs(currentTime-startTime);
+//   var timerUpdate = inputTimeMilliseconds - elapsedTimeMilliseconds;
+//   console.log(timerUpdate);
+//   var minutes = Math.floor(timerUpdate % (1000 * 60 * 60) / (1000 * 60));
+//   var seconds = Math.floor((timerUpdate % (1000 * 60)) / 1000);
+//   console.log(minutes);
+//   console.log(seconds);
+//   displayTime();
+//   if (timerUpdate === -1) {
+//     clearInterval(updateTimer);
+//     timerText.innerText = "00:00";
+//     startCompleteButton.innerText = 'COMPLETE!';
+//     window.alert("Time's up!");
+//   };
+// };
+//
+// function displayTime() {
+//   if (minutes < 10 && seconds > 10) {
+//     timerText.innerText = `${minutes.toString().padStart(2,"0")}:${seconds.toString()}`;
+//     console.log(timerText);
+//   } else if (minutes < 10 && seconds < 10) {
+//     timerText.innerText = `${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`
+//     console.log(timerText);
+//   } else {
+//     timerText.innerText = `${minutes.toString()}:${seconds.toString()}`;
+//     console.log(timerText);
+//   };
+// };
