@@ -139,6 +139,7 @@ function startTimer() {
   var inputTimeMilliseconds = (currentActivity.minutes * 60 * 1000) + (currentActivity.seconds * 1000);
   var elapsedTimeMilliseconds = Math.abs(currentTime-startTime);
   var timerUpdate = inputTimeMilliseconds - elapsedTimeMilliseconds;
+  console.log(timerUpdate);
   var minutes = Math.floor(timerUpdate % (1000 * 60 * 60) / (1000 * 60));
   var seconds = Math.floor((timerUpdate % (1000 * 60)) / 1000);
   console.log(minutes);
@@ -147,13 +148,13 @@ function startTimer() {
   if (timerUpdate === -1) {
     clearInterval(updateTimer);
     timerText.innerText = "00:00";
-    startCompleteButton.innerText = 'COMPLETE';
+    startCompleteButton.innerText = 'COMPLETE!';
     window.alert("Time's up!");
   };
 };
 
-displayTime() {
-  if (minutes < 10 && seconds > 10){
+function displayTime() {
+  if (minutes < 10 && seconds > 10) {
     timerText.innerText = `${minutes.toString().padStart(2,"0")}:${seconds.toString()}`;
     console.log(timerText);
   } else if (minutes < 10 && seconds < 10) {
@@ -163,4 +164,4 @@ displayTime() {
     timerText.innerText = `${minutes.toString()}:${seconds.toString()}`;
     console.log(timerText);
   };
-}
+};
