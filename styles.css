@@ -249,6 +249,18 @@ form {
   border-color: #B3FD78;
 }
 
+.exercise-box {
+  background-color: #FD8078;
+}
+
+.meditate-box {
+  background-color: #C278FD;
+}
+
+.study-box {
+  background-color: #B3FD78;
+}
+
 .square-button {
   color: #46424D;
   font-size: 15px;
@@ -318,7 +330,6 @@ form {
 }
 
 .activity-icon {
-  background-color: #C278FD;
   height: 35px;
   width: 5px;
   margin: 10px 15px 0 0;
