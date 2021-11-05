@@ -28,21 +28,30 @@ var categoryElements = {study:{button: studyButton, image: studyImage},
                         exercise:{button:exerciseButton, image:exerciseImage}};
 var currentActivatedCategory = "";
 var currentActivity;
+var startTime;
+var updateTimer;
 
 // EVENT LISTENERS
 studyButton.addEventListener("click", function(){
   setCategory("study")
 });
+
 meditateButton.addEventListener("click", function(){
   setCategory("meditate")
 });
+
 exerciseButton.addEventListener("click", function(){
   setCategory("exercise")
 });
+
 startActivityButton.addEventListener("click", function(event) {
   event.preventDefault();
   startActivity();
 });
+
+startCompleteButton.addEventListener("click", startTimer);
+
+startCompleteButton.addEventListener("click", pressStart);
 
 // FUNCTIONS
 function setCategory(selectedCategory) {
@@ -118,3 +127,40 @@ function changeButtonBorder() {
   var activity = currentActivity.category;
   startCompleteButton.classList.add(`${activity}-border`);
 };
+
+function pressStart() {
+  startTime = Date.now();
+  updateTimer = setInterval(startTimer, 1000);
+  startCompleteButton.innerText = '';
+};
+
+function startTimer() {
+  var currentTime = Date.now();
+  var inputTimeMilliseconds = (currentActivity.minutes * 60 * 1000) + (currentActivity.seconds * 1000);
+  var elapsedTimeMilliseconds = Math.abs(currentTime-startTime);
+  var timerUpdate = inputTimeMilliseconds - elapsedTimeMilliseconds;
+  var minutes = Math.floor(timerUpdate % (1000 * 60 * 60) / (1000 * 60));
+  var seconds = Math.floor((timerUpdate % (1000 * 60)) / 1000);
+  console.log(minutes);
+  console.log(seconds);
+  displayTime();
+  if (timerUpdate === -1) {
+    clearInterval(updateTimer);
+    timerText.innerText = "00:00";
+    startCompleteButton.innerText = 'COMPLETE';
+    window.alert("Time's up!");
+  };
+};
+
+displayTime() {
+  if (minutes < 10 && seconds > 10){
+    timerText.innerText = `${minutes.toString().padStart(2,"0")}:${seconds.toString()}`;
+    console.log(timerText);
+  } else if (minutes < 10 && seconds < 10) {
+    timerText.innerText = `${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`
+    console.log(timerText);
+  } else {
+    timerText.innerText = `${minutes.toString()}:${seconds.toString()}`;
+    console.log(timerText);
+  };
+}
