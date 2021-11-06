@@ -33,6 +33,7 @@ var currentActivatedCategory = "";
 var currentActivity;
 var startTime;
 var updateTimer;
+var savedActivities = [];
 
 // EVENT LISTENERS
 studyButton.addEventListener("click", function(){
@@ -57,6 +58,42 @@ startCompleteButton.addEventListener("click", callStartTimer);
 logActivityButton.addEventListener("click", logActivity);
 
 // FUNCTIONS
+// goal: store a completed activity in local storage
+// input: an object (one for each activity)
+// output: stringified version in local storage
+function pushToLSArray(){
+  savedActivities.push(currentActivity);
+  currentActivity.saveToStorage();
+}
+
+function pullFromLS(){
+  for (var i = 0; i < savedActivities.length; i++) {
+    localStorage.getItem(`${savedActivites[i].id}`);
+  }
+}
+
+// create empty array
+// add empty array to local storage (setItem('savedActivities', <stringified array>))
+
+// when we click save activity:
+// stringify the activity strigifiedActivity)
+// localStorage.setItem('savedActivies', stingifiedActivity)
+
+
+
+
+  // localStorage.setItem('storedActivites', JSON.stringify(savedActivites));
+
+
+// create a global empty array to hold all saved activity objects
+// add the current activity to array
+// stringify the array
+// add the array to local storage (setItems)
+
+// display:
+//  - parse the array from localStorage
+// -  display each saved object (add a loop to createActivityCard function)
+
 
 function logActivity() {
   addHidden(timerViewPage);
@@ -64,12 +101,7 @@ function logActivity() {
   removeHidden(completedViewPage);
   createActivityCard(currentActivity);
   pageTitle.innerText = "Completed Activity";
-  // goal: display the saved currentActivity on a card in the correct area
-  // input: referencing currentActivity object
-  // output: a new activity card with data from currentActivity object
-  // steps: add hidden to timer view and 'you havent logged' Text
-  //        remove hidden from completed view
-  //        display currentActivity data on card (helper function creatActivityCard???)
+  currentActivity.saveToStorage();
 };
 
 function createActivityCard(currentActivity) {
