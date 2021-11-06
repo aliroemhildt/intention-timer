@@ -5,7 +5,7 @@ class Activity {
     this.minutes = minutes;
     this.seconds = seconds;
     this.completed = false;
-    this.id = Date.now();
+    this.id = 'activity'+Date.now();
   };
 
   startTimer() {
