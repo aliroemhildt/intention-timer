@@ -5,7 +5,7 @@ class Activity {
     this.minutes = minutes;
     this.seconds = seconds;
     this.completed = false;
-    this.id = Date.now();
+    this.id = 'activity'+Date.now();
   };
 
   startTimer() {
@@ -17,5 +17,8 @@ class Activity {
     this.completed = true;
   };
 
-  saveToStorage() {};
+  saveToStorage() {
+    var stringifiedActivity = JSON.stringify(this);
+    localStorage.setItem(`${this.id}`, stringifiedActivity);
+  };
 };

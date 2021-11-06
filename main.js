@@ -24,6 +24,7 @@ var pageTitle = document.querySelector(".title");
 var logActivityButton = document.querySelector(".log-activity-button");
 var noActivitiesText = document.querySelector(".no-activities-text");
 var activityCardSection = document.querySelector(".activities-list");
+var createNewActivityButton = document.querySelector(".create-new-activity-button");
 
 // GLOBAL VARIABLES
 var categoryElements = {study:{button: studyButton, image: studyImage},
@@ -33,6 +34,7 @@ var currentActivatedCategory = "";
 var currentActivity;
 var startTime;
 var updateTimer;
+var savedActivities = [];
 
 // EVENT LISTENERS
 studyButton.addEventListener("click", function(){
@@ -56,40 +58,51 @@ startCompleteButton.addEventListener("click", callStartTimer);
 
 logActivityButton.addEventListener("click", logActivity);
 
+createNewActivityButton.addEventListener("click", returnHome);
+
+window.addEventListener("load", createActivityCard);
+
 // FUNCTIONS
+
+function returnHome(){
+  window.location.reload();
+}
 
 function logActivity() {
   addHidden(timerViewPage);
   addHidden(noActivitiesText);
   removeHidden(completedViewPage);
-  createActivityCard(currentActivity);
   pageTitle.innerText = "Completed Activity";
-  // goal: display the saved currentActivity on a card in the correct area
-  // input: referencing currentActivity object
-  // output: a new activity card with data from currentActivity object
-  // steps: add hidden to timer view and 'you havent logged' Text
-  //        remove hidden from completed view
-  //        display currentActivity data on card (helper function creatActivityCard???)
+  currentActivity.saveToStorage();
+  createActivityCard();
 };
 
-function createActivityCard(currentActivity) {
 
+function createActivityCard() {
   activityCardSection.innerHTML = ``;
-  activityCardSection.innerHTML = `
-  <div class="activity-card">
-    <div class="activity-details">
-      <p class="activity-card-label">${currentActivity.category}</p>
-      <p class="activity-card-time">${currentActivity.minutes.toString().padStart(2, "0")}:${currentActivity.seconds.toString().padStart(2, "0")}</p>
-      <p class="activity-card-description">${currentActivity.description}</p>
-    </div>
-    <div class="activity-icon-div">
-      <div class="activity-icon" id ="${currentActivity.id}">
+  for (var i = 0; i < localStorage.length; i++)
+  if (localStorage.key(i).includes("activity")) {
+    var stringifiedActivity = localStorage.getItem(`${localStorage.key(i)}`)
+    var parsedActivity = JSON.parse(stringifiedActivity);
+    activityCardSection.innerHTML += `
+    <div class="activity-card">
+      <div class="activity-details">
+        <p class="activity-card-label">${parsedActivity.category}</p>
+        <p class="activity-card-time">${parsedActivity.minutes.toString().padStart(2, "0")}:${parsedActivity.seconds.toString().padStart(2, "0")}</p>
+        <p class="activity-card-description">${parsedActivity.description}</p>
+      </div>
+      <div class="activity-icon-div">
+        <div class="activity-icon" id ="${parsedActivity.id}">
+        </div>
       </div>
     </div>
-  </div>
-  `;
-  var activityCardIcon = document.getElementById(`${currentActivity.id}`);
-  activityCardIcon.classList.add(`${currentActivity.category}-box`);
+    `;
+    var activityCardIcon = document.getElementById(`${parsedActivity.id}`);
+    activityCardIcon.classList.add(`${parsedActivity.category}-box`);
+  };
+  if (activityCardSection.innerHTML) {
+      addHidden(noActivitiesText);
+  };
 };
 
 
