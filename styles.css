@@ -19,8 +19,7 @@ body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
-  /* min-height: 100vh; */
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 header {
@@ -29,9 +28,10 @@ header {
 
 .header-title {
   margin: 0px;
-  padding: 10px;
+  padding: 20px;
   color: #FFF;
   text-align: center;
+  font-size: 26px;
 }
 
 main {
@@ -43,26 +43,34 @@ main {
   height: 100vh;
   color: #FFF;
   font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
 }
 
 .title {
   padding: 0px;
   color: #CBC9CF;
   font-weight: 300;
-  font-size: 20px;
-  margin: 20px 20px 10px 20px;
+  font-size: 26px;
+  margin: 20px 20px 0px 20px;
 }
 
 .choose-category-view, .timer-view, .completed-view {
   background-color: #46424D;
-  height: 80%;
+  height: 78%;
   border-radius: 5px;
   box-shadow: 5px 5px 1px 1px #26222D;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 0px 20px 0px 20px;
+  margin: 20px;
+}
+
+.choose-category-view {
+  justify-content: center;
 }
 
 .category-button-section {
@@ -85,6 +93,7 @@ main {
 .select-category {
   padding: 20px 0 0 0;
   width: 75%;
+  font-size: 20px;
 }
 
 form {
@@ -98,6 +107,7 @@ form {
   display: flex;
   flex-direction: column;
   padding: 20px 0 0 0;
+  font-size: 20px;
 }
 
 .goal-div {
@@ -150,7 +160,7 @@ form {
 
 .start-activity-button {
   margin-top: 60px;
-  width: 25%;
+  width: 30%;
 }
 
 .start-activity-disabled:disabled,
@@ -163,6 +173,10 @@ form {
   border-left: 2px solid;
   border-color: #46424D;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
 }
 
 .activities-title, .no-activities-text {
@@ -263,7 +277,7 @@ form {
 
 .square-button {
   color: #46424D;
-  font-size: 15px;
+  font-size: 20px;
   padding: 5px;
 }
 
@@ -290,9 +304,8 @@ form {
 .activity-card {
   background-color: #46424D;
   border-radius: 5px;
-  width: 100%;
   display: flex;
-  margin: 8px;
+  margin-bottom: 20px;
   box-shadow: 5px 5px 1px 1px #26222D;
 }
 
