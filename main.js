@@ -77,6 +77,9 @@ function logActivity() {
   createActivityCard();
 };
 
+function createCardCategory(category) {
+  return category.charAt(0).toUpperCase() + category.substr(1);
+}
 
 function createActivityCard() {
   activityCardSection.innerHTML = ``;
@@ -87,8 +90,8 @@ function createActivityCard() {
     activityCardSection.innerHTML += `
     <div class="activity-card">
       <div class="activity-details">
-        <p class="activity-card-label">${parsedActivity.category}</p>
-        <p class="activity-card-time">${parsedActivity.minutes.toString().padStart(2, "0")}:${parsedActivity.seconds.toString().padStart(2, "0")}</p>
+        <p class="activity-card-label">${createCardCategory(parsedActivity.category)}</p>
+        <p class="activity-card-time">${renderTimer(parsedActivity.minutes, parsedActivity.seconds)}</p>
         <p class="activity-card-description">${parsedActivity.description}</p>
       </div>
       <div class="activity-icon-div">
@@ -148,7 +151,7 @@ function startActivity() {
     addHidden(chooseCatViewPage);
     removeHidden(timerViewPage);
     currentActivity = new Activity(currentActivatedCategory, goalInput.value, parseInt(minsInput.value), parseInt(secsInput.value));
-    renderTimer(currentActivity.minutes, currentActivity.seconds);
+    timerText.innerText = renderTimer(currentActivity.minutes, currentActivity.seconds);
     activityName.innerText = `${goalInput.value}`;
     changeButtonBorder();
     pageTitle.innerText = "Current Activity";
@@ -204,10 +207,10 @@ function updateTimer(){
   var remainingSeconds = Math.floor(remainingDuration / 1000);
   var minutesComponent = Math.floor(remainingSeconds / 60);
   var secondsComponent = Math.floor(remainingSeconds % 60);
-  renderTimer(minutesComponent, secondsComponent);
+  timerText.innerText = renderTimer(minutesComponent, secondsComponent);
   window.requestAnimationFrame(updateTimer);
 }
 
 function renderTimer(minutes, seconds){
-  timerText.innerText = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
