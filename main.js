@@ -33,8 +33,7 @@ var categoryElements = {study:{button: studyButton, image: studyImage},
 var currentActivatedCategory = "";
 var currentActivity;
 var startTime;
-var updateTimer;
-var savedActivities = [];
+
 
 // EVENT LISTENERS
 studyButton.addEventListener("click", function(){
@@ -65,8 +64,13 @@ window.addEventListener("load", createActivityCard);
 // FUNCTIONS
 
 function returnHome(){
-  window.location.reload();
-}
+  addHidden(completedViewPage);
+  removeHidden(chooseCatViewPage);
+  deactivateCategory(currentActivatedCategory);
+  goalInput.value = null;
+  secsInput.value = null;
+  minsInput.value = null;
+};
 
 function logActivity() {
   addHidden(timerViewPage);
@@ -79,35 +83,35 @@ function logActivity() {
 
 function createCardCategory(category) {
   return category.charAt(0).toUpperCase() + category.substr(1);
-}
+};
 
 function createActivityCard() {
   activityCardSection.innerHTML = ``;
-  for (var i = 0; i < localStorage.length; i++)
-  if (localStorage.key(i).includes("activity")) {
-    var stringifiedActivity = localStorage.getItem(`${localStorage.key(i)}`)
-    var parsedActivity = JSON.parse(stringifiedActivity);
-    activityCardSection.innerHTML += `
-    <div class="activity-card">
-      <div class="activity-details">
-        <p class="activity-card-label">${createCardCategory(parsedActivity.category)}</p>
-        <p class="activity-card-time">${renderTimer(parsedActivity.minutes, parsedActivity.seconds)}</p>
-        <p class="activity-card-description">${parsedActivity.description}</p>
-      </div>
-      <div class="activity-icon-div">
-        <div class="activity-icon" id ="${parsedActivity.id}">
+  for (var i = 0; i < localStorage.length; i++){
+    if (localStorage.key(i).includes("activity")) {
+      var stringifiedActivity = localStorage.getItem(`${localStorage.key(i)}`)
+      var parsedActivity = JSON.parse(stringifiedActivity);
+      activityCardSection.innerHTML += `
+      <div class="activity-card">
+        <div class="activity-details">
+          <p class="activity-card-label">${createCardCategory(parsedActivity.category)}</p>
+          <p class="activity-card-time">${renderTimer(parsedActivity.minutes, parsedActivity.seconds)}</p>
+          <p class="activity-card-description">${parsedActivity.description}</p>
+        </div>
+        <div class="activity-icon-div">
+          <div class="activity-icon" id ="${parsedActivity.id}">
+          </div>
         </div>
       </div>
-    </div>
-    `;
-    var activityCardIcon = document.getElementById(`${parsedActivity.id}`);
-    activityCardIcon.classList.add(`${parsedActivity.category}-box`);
-  };
-  if (activityCardSection.innerHTML) {
-      addHidden(noActivitiesText);
+      `;
+      var activityCardIcon = document.getElementById(`${parsedActivity.id}`);
+      activityCardIcon.classList.add(`${parsedActivity.category}-box`);
+    };
+    if (activityCardSection.innerHTML) {
+        addHidden(noActivitiesText);
+    };
   };
 };
-
 
 function setCategory(selectedCategory) {
   if (currentActivatedCategory !== "") {
@@ -125,7 +129,6 @@ function deactivateCategory(category){
 
 function activateCategory(category){
   var currCategory = categoryElements[category];
-  console.log(category, currCategory);
   currCategory.button.classList.add(`${category}-button-clicked`);
   currCategory.image.src = `assets/${category}-active.svg`;
 };
@@ -184,14 +187,14 @@ function changeButtonBorder() {
 
 function changeActivityCardColor() {
   var activity = currentActivity.category;
-
-}
+};
 
 function callStartTimer() {
+  var startTime = Date.now();
   currentActivity.startTimer();
   startCompleteButton.disabled = true;
   startCompleteButton.innerText = '';
-}
+};
 
 function updateTimer(){
   var currentTime = Date.now();
@@ -209,8 +212,8 @@ function updateTimer(){
   var secondsComponent = Math.floor(remainingSeconds % 60);
   timerText.innerText = renderTimer(minutesComponent, secondsComponent);
   window.requestAnimationFrame(updateTimer);
-}
+};
 
 function renderTimer(minutes, seconds){
   return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-}
+};
