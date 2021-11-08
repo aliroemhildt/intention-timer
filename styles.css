@@ -30,7 +30,6 @@ main {
 
 .left-section {
   flex-grow: 2;
-  /* height: 100vh; */
   color: #FFF;
   font-weight: 400;
   display: flex;
