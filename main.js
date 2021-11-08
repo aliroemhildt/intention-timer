@@ -34,7 +34,6 @@ var currentActivatedCategory = "";
 var currentActivity;
 var startTime;
 
-
 // EVENT LISTENERS
 studyButton.addEventListener("click", function(){
   setCategory("study")
@@ -62,11 +61,13 @@ createNewActivityButton.addEventListener("click", returnHome);
 window.addEventListener("load", createActivityCard);
 
 // FUNCTIONS
-
 function returnHome(){
   addHidden(completedViewPage);
   removeHidden(chooseCatViewPage);
   deactivateCategory(currentActivatedCategory);
+  currentActivatedCategory = '';
+  startCompleteButton.classList.remove(`${currentActivity.category}-border`);
+  pageTitle.innerText = 'New Activity';
   goalInput.value = null;
   secsInput.value = null;
   minsInput.value = null;
@@ -95,7 +96,7 @@ function createActivityCard() {
       <div class="activity-card">
         <div class="activity-details">
           <p class="activity-card-label">${createCardCategory(parsedActivity.category)}</p>
-          <p class="activity-card-time">${renderTimer(parsedActivity.minutes, parsedActivity.seconds)}</p>
+          <p class="activity-card-time">${parsedActivity.minutes} MINS ${parsedActivity.seconds} SECONDS</p>
           <p class="activity-card-description">${parsedActivity.description}</p>
         </div>
         <div class="activity-icon-div">
@@ -153,11 +154,14 @@ function startActivity() {
   if (currentActivatedCategory !== '' && goalInput.value !== '' && minsInput.value !== '' && secsInput.value !== '') {
     addHidden(chooseCatViewPage);
     removeHidden(timerViewPage);
+    addHidden(logActivityButton);
     currentActivity = new Activity(currentActivatedCategory, goalInput.value, parseInt(minsInput.value), parseInt(secsInput.value));
     timerText.innerText = renderTimer(currentActivity.minutes, currentActivity.seconds);
     activityName.innerText = `${goalInput.value}`;
     changeButtonBorder();
     pageTitle.innerText = "Current Activity";
+    startCompleteButton.innerText = 'START';
+    startCompleteButton.disabled = false;
   } else {
     showInputError();
   };
