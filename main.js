@@ -25,9 +25,12 @@ var logActivityButton = document.querySelector(".log-activity-button");
 var noActivitiesText = document.querySelector(".no-activities-text");
 var activityCardSection = document.querySelector(".activities-list");
 var createNewActivityButton = document.querySelector(".create-new-activity-button");
+var inputs = document.querySelectorAll("input");
+var errorMessages = document.querySelectorAll(".error-message")
 
 // GLOBAL VARIABLES
 var currentActivity;
+var savedActivities = [];
 
 // EVENT LISTENERS
 studyButton.addEventListener("click", function() {
@@ -53,7 +56,7 @@ logActivityButton.addEventListener("click", logActivity);
 
 createNewActivityButton.addEventListener("click", returnHome);
 
-window.addEventListener("load", createActivityCard);
+window.addEventListener("load", displayActivityCards);
 
 // FUNCTIONS
 function getActivatedCategory() {
@@ -70,10 +73,21 @@ function returnHome() {
   deactivateCategory(getActivatedCategory());
   startCompleteButton.classList.remove(`${currentActivity.category}-border`);
   pageTitle.innerText = "New Activity";
-  goalInput.value = null;
-  secsInput.value = null;
-  minsInput.value = null;
+  clearInputs();
+  clearErrorMessages();
+  };
+
+function clearInputs() {
+  for (i = 0; i < inputs.length; i ++) {
+    inputs[i].value = null;
+  };
 };
+
+  function clearErrorMessages() {
+    for (i = 0; i < errorMessages.length; i++){
+      addErrorHidden(errorMessages[i]);
+    };
+  };
 
 function logActivity() {
   addHidden(timerViewPage);
@@ -81,40 +95,66 @@ function logActivity() {
   removeHidden(completedViewPage);
   pageTitle.innerText = "Completed Activity";
   currentActivity.saveToStorage();
-  createActivityCard();
+  displayActivityCards();
 };
 
 function createCardCategory(category) {
   return category.charAt(0).toUpperCase() + category.substr(1);
 };
 
-function createActivityCard() {
+function displayActivityCards() {
   activityCardSection.innerHTML = ``;
-  for (var i = 0; i < localStorage.length; i++) {
-    var stringifiedActivity = localStorage.getItem(`${localStorage.key(i)}`)
-    var parsedActivity = JSON.parse(stringifiedActivity);
-    activityCardSection.innerHTML += `
-    <div class="activity-card">
-      <div class="activity-details">
-        <p class="activity-card-label">${createCardCategory(parsedActivity.category)}</p>
-        <p class="activity-card-time">${parsedActivity.minutes} MIN ${parsedActivity.seconds} SECONDS</p>
-        <p class="activity-card-description">${parsedActivity.description}</p>
-      </div>
-      <div class="activity-icon-div">
-        <div class="activity-icon" id ="${parsedActivity.id}">
-        </div>
-      </div>
-    </div>
-    `;
-    var activityCardIcon = document.getElementById(`${parsedActivity.id}`);
-    activityCardIcon.classList.add(`${parsedActivity.category}-box`);
+  savedActivities = [];
+  getStoredActivities();
+  sortList(savedActivities);
+  for (var i = 0; i < savedActivities.length; i++) {
+    addToActivityList(savedActivities[i]);
+  };
+  if (savedActivities.length > 0) {
     addHidden(noActivitiesText);
   };
 };
 
+function getStoredActivities() {
+  for (var i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i).includes("activity")) {
+      var stringifiedActivity = localStorage.getItem(`${localStorage.key(i)}`)
+      var parsedActivity = JSON.parse(stringifiedActivity);
+      savedActivities.push(parsedActivity);
+    };
+  };
+};
+
+function sortList(list) {
+  for (i = 0; i < savedActivities.length;i++){
+    savedActivities[i].id = savedActivities[i].id.substring(8);
+  };
+  savedActivities = savedActivities.sort(function(a, b) {
+    return b.id - a.id;
+  });
+};
+
+function addToActivityList(activity) {
+  activityCardSection.innerHTML += `
+  <div class="activity-card">
+    <div class="activity-details">
+      <p class="activity-card-label">${createCardCategory(activity.category)}</p>
+      <p class="activity-card-time">${activity.minutes} MIN ${activity.seconds} SECONDS</p>
+      <p class="activity-card-description">${activity.description}</p>
+    </div>
+    <div class="activity-icon-div">
+      <div class="activity-icon" id ="${activity.id}">
+      </div>
+    </div>
+  </div>
+  `;
+  var activityCardIcon = document.getElementById(`${activity.id}`);
+  activityCardIcon.classList.add(`${activity.category}-box`);
+};
+
 function setCategory(selectedCategory) {
   var currentActivatedCategory = getActivatedCategory();
-  if (currentActivatedCategory !== "") {
+  if (currentActivatedCategory) {
     deactivateCategory(currentActivatedCategory);
   };
   activateCategory(selectedCategory);
@@ -161,7 +201,7 @@ function removeErrorHidden(element) {
 };
 
 function startActivity() {
-  if (getActivatedCategory() !== "" && goalInput.value !== "" && minsInput.value !== "" && secsInput.value !== "") {
+  if (getActivatedCategory() && goalInput.value && minsInput.value && secsInput.value) {
     addHidden(chooseCatViewPage);
     removeHidden(timerViewPage);
     addHidden(logActivityButton);
@@ -181,13 +221,13 @@ function showInputError() {
   var inputElements = [goalInput, minsInput, secsInput];
   var errorElements = [goalError, minutesError, secondsError];
   for (var i = 0; i < inputElements.length; i++) {
-    if (inputElements[i].value === "") {
+    if (!inputElements[i].value) {
       removeErrorHidden(errorElements[i]);
     } else {
       addErrorHidden(errorElements[i])
     }
   };
-  if (getActivatedCategory() === "") {
+  if (!getActivatedCategory()) {
     removeErrorHidden(buttonError);
   } else {
     addErrorHidden(buttonError);
