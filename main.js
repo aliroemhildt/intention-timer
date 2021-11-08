@@ -27,23 +27,18 @@ var activityCardSection = document.querySelector(".activities-list");
 var createNewActivityButton = document.querySelector(".create-new-activity-button");
 
 // GLOBAL VARIABLES
-var categoryElements = {study:{button: studyButton, image: studyImage},
-                        meditate:{button:meditateButton, image: meditateImage},
-                        exercise:{button:exerciseButton, image:exerciseImage}};
-var currentActivatedCategory = "";
 var currentActivity;
-var startTime;
 
 // EVENT LISTENERS
-studyButton.addEventListener("click", function(){
+studyButton.addEventListener("click", function() {
   setCategory("study")
 });
 
-meditateButton.addEventListener("click", function(){
+meditateButton.addEventListener("click", function() {
   setCategory("meditate")
 });
 
-exerciseButton.addEventListener("click", function(){
+exerciseButton.addEventListener("click", function() {
   setCategory("exercise")
 });
 
@@ -61,13 +56,20 @@ createNewActivityButton.addEventListener("click", returnHome);
 window.addEventListener("load", createActivityCard);
 
 // FUNCTIONS
-function returnHome(){
+function getActivatedCategory() {
+  var categoryElement = document.querySelector(".activated-category");
+  if (!categoryElement) {
+    return "";
+  };
+  return categoryElement.id;
+};
+
+function returnHome() {
   addHidden(completedViewPage);
   removeHidden(chooseCatViewPage);
-  deactivateCategory(currentActivatedCategory);
-  currentActivatedCategory = '';
+  deactivateCategory(getActivatedCategory());
   startCompleteButton.classList.remove(`${currentActivity.category}-border`);
-  pageTitle.innerText = 'New Activity';
+  pageTitle.innerText = "New Activity";
   goalInput.value = null;
   secsInput.value = null;
   minsInput.value = null;
@@ -88,79 +90,87 @@ function createCardCategory(category) {
 
 function createActivityCard() {
   activityCardSection.innerHTML = ``;
-  for (var i = 0; i < localStorage.length; i++){
-    if (localStorage.key(i).includes("activity")) {
-      var stringifiedActivity = localStorage.getItem(`${localStorage.key(i)}`)
-      var parsedActivity = JSON.parse(stringifiedActivity);
-      activityCardSection.innerHTML += `
-      <div class="activity-card">
-        <div class="activity-details">
-          <p class="activity-card-label">${createCardCategory(parsedActivity.category)}</p>
-          <p class="activity-card-time">${parsedActivity.minutes} MINS ${parsedActivity.seconds} SECONDS</p>
-          <p class="activity-card-description">${parsedActivity.description}</p>
-        </div>
-        <div class="activity-icon-div">
-          <div class="activity-icon" id ="${parsedActivity.id}">
-          </div>
+  for (var i = 0; i < localStorage.length; i++) {
+    var stringifiedActivity = localStorage.getItem(`${localStorage.key(i)}`)
+    var parsedActivity = JSON.parse(stringifiedActivity);
+    activityCardSection.innerHTML += `
+    <div class="activity-card">
+      <div class="activity-details">
+        <p class="activity-card-label">${createCardCategory(parsedActivity.category)}</p>
+        <p class="activity-card-time">${parsedActivity.minutes} MIN ${parsedActivity.seconds} SECONDS</p>
+        <p class="activity-card-description">${parsedActivity.description}</p>
+      </div>
+      <div class="activity-icon-div">
+        <div class="activity-icon" id ="${parsedActivity.id}">
         </div>
       </div>
-      `;
-      var activityCardIcon = document.getElementById(`${parsedActivity.id}`);
-      activityCardIcon.classList.add(`${parsedActivity.category}-box`);
-    };
-    if (activityCardSection.innerHTML) {
-        addHidden(noActivitiesText);
-    };
+    </div>
+    `;
+    var activityCardIcon = document.getElementById(`${parsedActivity.id}`);
+    activityCardIcon.classList.add(`${parsedActivity.category}-box`);
+    addHidden(noActivitiesText);
   };
 };
 
 function setCategory(selectedCategory) {
+  var currentActivatedCategory = getActivatedCategory();
   if (currentActivatedCategory !== "") {
     deactivateCategory(currentActivatedCategory);
   };
   activateCategory(selectedCategory);
-  currentActivatedCategory = selectedCategory;
 };
 
-function deactivateCategory(category){
-  var currCategory = categoryElements[category];
+function getCategoryElements(category) {
+  if (category === "study") {
+    return {button: studyButton, image: studyImage};
+  } else if (category === "meditate") {
+    return {button: meditateButton, image: meditateImage};
+  } else if (category === "exercise") {
+    return {button: exerciseButton, image: exerciseImage};
+  };
+};
+
+function deactivateCategory(category) {
+  var currCategory = getCategoryElements(category);
   currCategory.button.classList.remove(`${category}-button-clicked`);
+  currCategory.button.classList.remove("activated-category");
   currCategory.image.src = `assets/${category}.svg`;
 };
 
-function activateCategory(category){
-  var currCategory = categoryElements[category];
+function activateCategory(category) {
+  var currCategory = getCategoryElements(category);
   currCategory.button.classList.add(`${category}-button-clicked`);
+  currCategory.button.classList.add("activated-category");
   currCategory.image.src = `assets/${category}-active.svg`;
 };
 
 function addHidden(element) {
-  element.classList.add('hidden');
+  element.classList.add("hidden");
 };
 
 function addErrorHidden(element) {
-  element.classList.add('error-hidden');
+  element.classList.add("error-hidden");
 };
 
 function removeHidden(element) {
-  element.classList.remove('hidden');
+  element.classList.remove("hidden");
 };
 
 function removeErrorHidden(element) {
-  element.classList.remove('error-hidden');
+  element.classList.remove("error-hidden");
 };
 
 function startActivity() {
-  if (currentActivatedCategory !== '' && goalInput.value !== '' && minsInput.value !== '' && secsInput.value !== '') {
+  if (getActivatedCategory() !== "" && goalInput.value !== "" && minsInput.value !== "" && secsInput.value !== "") {
     addHidden(chooseCatViewPage);
     removeHidden(timerViewPage);
     addHidden(logActivityButton);
-    currentActivity = new Activity(currentActivatedCategory, goalInput.value, parseInt(minsInput.value), parseInt(secsInput.value));
-    timerText.innerText = renderTimer(currentActivity.minutes, currentActivity.seconds);
+    currentActivity = new Activity(getActivatedCategory(), goalInput.value, parseInt(minsInput.value), parseInt(secsInput.value));
+    renderTimer(currentActivity.minutes, currentActivity.seconds);
     activityName.innerText = `${goalInput.value}`;
     changeButtonBorder();
     pageTitle.innerText = "Current Activity";
-    startCompleteButton.innerText = 'START';
+    startCompleteButton.innerText = "START";
     startCompleteButton.disabled = false;
   } else {
     showInputError();
@@ -171,13 +181,13 @@ function showInputError() {
   var inputElements = [goalInput, minsInput, secsInput];
   var errorElements = [goalError, minutesError, secondsError];
   for (var i = 0; i < inputElements.length; i++) {
-    if (inputElements[i].value === ''){
+    if (inputElements[i].value === "") {
       removeErrorHidden(errorElements[i]);
     } else {
       addErrorHidden(errorElements[i])
     }
   };
-  if (!currentActivatedCategory) {
+  if (getActivatedCategory() === "") {
     removeErrorHidden(buttonError);
   } else {
     addErrorHidden(buttonError);
@@ -195,29 +205,17 @@ function changeActivityCardColor() {
 
 function callStartTimer() {
   var startTime = Date.now();
-  currentActivity.startTimer();
+  currentActivity.startTimer(renderTimer, onTimerComplete);
   startCompleteButton.disabled = true;
-  startCompleteButton.innerText = '';
+  startCompleteButton.innerText = "";
 };
 
-function updateTimer(){
-  var currentTime = Date.now();
-  var elapsedTime = currentTime - startTime;
-  var overAllDuration = (currentActivity.minutes * 60 + currentActivity.seconds) * 1000;
-  var remainingDuration = overAllDuration - elapsedTime;
-  if (remainingDuration <= 0) {
-    startCompleteButton.innerText = "COMPLETE!";
-    removeHidden(logActivityButton);
-    currentActivity.markComplete();
-    return;
-  }
-  var remainingSeconds = Math.floor(remainingDuration / 1000);
-  var minutesComponent = Math.floor(remainingSeconds / 60);
-  var secondsComponent = Math.floor(remainingSeconds % 60);
-  timerText.innerText = renderTimer(minutesComponent, secondsComponent);
-  window.requestAnimationFrame(updateTimer);
+function onTimerComplete() {
+  startCompleteButton.innerText = "COMPLETE!";
+  removeHidden(logActivityButton);
+  currentActivity.markComplete();
 };
 
-function renderTimer(minutes, seconds){
-  return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+function renderTimer(minutes, seconds) {
+  timerText.innerText = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 };
