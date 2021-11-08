@@ -20,6 +20,13 @@ main {
   display: flex;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0 0 0;
+  width: 75%;
+}
+
 .header-title {
   margin: 0px;
   padding: 20px;
@@ -36,6 +43,16 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   width: 700px;
+}
+
+.right-section {
+  flex-grow: 1;
+  border-left: 2px solid;
+  border-color: #46424D;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 }
 
 .title {
@@ -82,13 +99,6 @@ main {
   padding: 20px 0 0 0;
   width: 75%;
   font-size: 20px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  padding: 20px 0 0 0;
-  width: 75%;
 }
 
 .goal-div,
@@ -146,21 +156,6 @@ form {
 .start-activity-button {
   margin: 40px 0px 40px 0px;
   width: 220px;
-}
-
-.start-activity-disabled:disabled,
-.start-activity-disabled[disabled] {
-  opacity: 0.3;
-}
-
-.right-section {
-  flex-grow: 1;
-  border-left: 2px solid;
-  border-color: #46424D;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
 }
 
 .activities-title,

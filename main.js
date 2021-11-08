@@ -2,7 +2,7 @@
 var studyButton = document.querySelector("#study");
 var meditateButton = document.querySelector("#meditate");
 var exerciseButton = document.querySelector("#exercise");
-var categorySection = document.querySelector(".category-button-section")
+var categorySection = document.querySelector(".category-button-section");
 var studyImage = document.querySelector("#studyImage");
 var meditateImage = document.querySelector("#meditateImage");
 var exerciseImage = document.querySelector("#exerciseImage");
@@ -26,7 +26,7 @@ var noActivitiesText = document.querySelector(".no-activities-text");
 var activityCardSection = document.querySelector(".activities-list");
 var createNewActivityButton = document.querySelector(".create-new-activity-button");
 var inputs = document.querySelectorAll("input");
-var errorMessages = document.querySelectorAll(".error-message")
+var errorMessages = document.querySelectorAll(".error-message");
 
 // GLOBAL VARIABLES
 var currentActivity;
@@ -64,6 +64,7 @@ function getActivatedCategory() {
   if (!categoryElement) {
     return "";
   };
+
   return categoryElement.id;
 };
 
@@ -110,6 +111,7 @@ function displayActivityCards() {
   for (var i = 0; i < savedActivities.length; i++) {
     addToActivityList(savedActivities[i]);
   };
+
   if (savedActivities.length > 0) {
     addHidden(noActivitiesText);
   };
@@ -118,7 +120,7 @@ function displayActivityCards() {
 function getStoredActivities() {
   for (var i = 0; i < localStorage.length; i++) {
     if (localStorage.key(i).includes("activity")) {
-      var stringifiedActivity = localStorage.getItem(`${localStorage.key(i)}`)
+      var stringifiedActivity = localStorage.getItem(`${localStorage.key(i)}`);
       var parsedActivity = JSON.parse(stringifiedActivity);
       savedActivities.push(parsedActivity);
     };
@@ -129,6 +131,7 @@ function sortList(list) {
   for (i = 0; i < savedActivities.length;i++){
     savedActivities[i].id = savedActivities[i].id.substring(8);
   };
+
   savedActivities = savedActivities.sort(function(a, b) {
     return b.id - a.id;
   });
@@ -157,6 +160,7 @@ function setCategory(selectedCategory) {
   if (currentActivatedCategory) {
     deactivateCategory(currentActivatedCategory);
   };
+
   activateCategory(selectedCategory);
 };
 
@@ -227,6 +231,7 @@ function showInputError() {
       addErrorHidden(errorElements[i])
     }
   };
+
   if (!getActivatedCategory()) {
     removeErrorHidden(buttonError);
   } else {
