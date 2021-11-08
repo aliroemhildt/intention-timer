@@ -47,6 +47,7 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   overflow: hidden;
+  width: 700px;
 }
 
 .title {
@@ -74,7 +75,7 @@ main {
 }
 
 .category-button-section {
-  width: 75%;
+  width: 106%;
   height: 100px;
   display: flex;
   flex-direction: column;
@@ -83,11 +84,10 @@ main {
 }
 
 .button-div {
-  width: 100%;
+  width: 75%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 20px;
 }
 
 .select-category {
@@ -108,10 +108,6 @@ form {
   flex-direction: column;
   padding: 20px 0 0 0;
   font-size: 20px;
-}
-
-.goal-div {
-  width: 100%;
 }
 
 .input {
@@ -160,7 +156,7 @@ form {
 
 .start-activity-button {
   margin-top: 60px;
-  width: 30%;
+  width: 220px;
 }
 
 .start-activity-disabled:disabled,
@@ -187,18 +183,19 @@ form {
   text-align: center;
   color: #CBC9CF;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .category-button {
-  height: 60px;
-  width: 160px;
+  height: 70px;
+  width: 150px;
   background-color: #46424D;
   border-color: #FFF;
   border-style: solid;
   color: #FFF;
   border-radius: 5px;
   border-width: 1.5px;
+  margin: 20px;
 }
 
 .study-button-clicked {
@@ -241,8 +238,8 @@ form {
 
 .start-complete-button {
   border-radius: 50%;
-  height: 175px;
-  width: 175px;
+  height: 200px;
+  width: 200px;
   display: block;
   margin: 50px 0px 50px 0px;
   background-color: #46424D;
@@ -277,13 +274,15 @@ form {
 
 .square-button {
   color: #46424D;
-  font-size: 20px;
-  padding: 5px;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+  border-style: none;
 }
 
 .log-activity-button {
-  margin: 10px;
-  width: 150px;
+  margin-bottom: 40px;
+  width: 200px;
 }
 
 .create-new-activity-button {
