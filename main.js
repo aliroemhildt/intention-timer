@@ -154,7 +154,7 @@ function addToActivityList(activity) {
 
 function setCategory(selectedCategory) {
   var currentActivatedCategory = getActivatedCategory();
-  if (currentActivatedCategory !== "") {
+  if (currentActivatedCategory) {
     deactivateCategory(currentActivatedCategory);
   };
   activateCategory(selectedCategory);
@@ -201,7 +201,7 @@ function removeErrorHidden(element) {
 };
 
 function startActivity() {
-  if (getActivatedCategory() !== "" && goalInput.value !== "" && minsInput.value !== "" && secsInput.value !== "") {
+  if (getActivatedCategory() && goalInput.value && minsInput.value && secsInput.value) {
     addHidden(chooseCatViewPage);
     removeHidden(timerViewPage);
     addHidden(logActivityButton);
@@ -221,7 +221,7 @@ function showInputError() {
   var inputElements = [goalInput, minsInput, secsInput];
   var errorElements = [goalError, minutesError, secondsError];
   for (var i = 0; i < inputElements.length; i++) {
-    if (inputElements[i].value === "") {
+    if (!inputElements[i].value) {
       removeErrorHidden(errorElements[i]);
     } else {
       addErrorHidden(errorElements[i])
