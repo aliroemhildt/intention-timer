@@ -106,12 +106,10 @@ function displayActivityCards() {
   activityCardSection.innerHTML = ``;
   savedActivities = [];
   getStoredActivities();
-
   sortList(savedActivities);
   for (var i = 0; i < savedActivities.length; i++) {
     addToActivityList(savedActivities[i]);
   };
-
   if (savedActivities.length > 0) {
     addHidden(noActivitiesText);
   };
