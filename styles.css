@@ -118,19 +118,19 @@ form {
   display: flex;
 }
 
-.time-div-left,
-.time-div-right {
+.time-div-right,
+.time-div-left {
   display: flex;
   flex-direction: column;
   width: 50%;
 }
 
-.time-div-right {
-  margin-left: 20px;
+.time-div-left {
+  margin-right: 20px;
 }
 
-.time-dive-left {
-  margin-right: 20px;
+.time-div-right {
+  margin-left: 20px;
 }
 
 .mins-div,
