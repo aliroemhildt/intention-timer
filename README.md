@@ -23,7 +23,7 @@ This app can be accessed with this GitHub Pages link:
 
 [GitHub test site](https://aliroemhildt.github.io/intention-timer/)
 
-This app can also be accessed by:
+This app can also be accessed through the following steps:
 
 - Fork the project to your own Github account
 - Clone the repository to your local machine
