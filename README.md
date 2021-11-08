@@ -16,7 +16,7 @@ On the landing page the user can set a goal for three categories: study, meditat
 
 **Create New Activity Page**
 
-![Create New Activity Gif](https://media.giphy.com/media/7OGxJMuyxwmKcTLf0c/giphy.gif)
+![Create New Activity Gif](https://media.giphy.com/media/9d3UYfBOxyGUr9GOps/giphy.gif)
 
 ## Setup
 This app can be accessed with this GitHub Pages link:
