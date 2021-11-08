@@ -16,16 +16,16 @@ header {
   background-color: #46424D;
 }
 
+main {
+  display: flex;
+}
+
 .header-title {
   margin: 0px;
   padding: 20px;
   color: #FFF;
   text-align: center;
   font-size: 26px;
-}
-
-main {
-  display: flex;
 }
 
 .left-section {
@@ -45,7 +45,9 @@ main {
   margin: 20px 20px 0px 20px;
 }
 
-.choose-category-view, .timer-view, .completed-view {
+.choose-category-view,
+.timer-view,
+.completed-view {
   background-color: #46424D;
   height: 78%;
   border-radius: 5px;
@@ -89,7 +91,9 @@ form {
   width: 75%;
 }
 
-.goal-div, .mins-div, .secs-div {
+.goal-div,
+.mins-div,
+.secs-div {
   display: flex;
   flex-direction: column;
   padding: 20px 0 0 0;
@@ -98,7 +102,7 @@ form {
 
 .input {
   background: transparent;
-  border: none;
+  border: 0;
   border-bottom: 1px solid #FFF;
   margin: 8px 0px 8px 0px;
   color: white;
@@ -114,21 +118,23 @@ form {
   display: flex;
 }
 
-.time-div-left {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin-right: 20px;
-}
-
+.time-div-left,
 .time-div-right {
   display: flex;
   flex-direction: column;
   width: 50%;
+}
+
+.time-div-right {
   margin-left: 20px;
 }
 
-.mins-div, .secs-div {
+.time-dive-left {
+  margin-right: 20px;
+}
+
+.mins-div,
+.secs-div {
   width: 100%;
 }
 
@@ -157,7 +163,8 @@ form {
   overflow: auto;
 }
 
-.activities-title, .no-activities-text {
+.activities-title,
+.no-activities-text {
   margin: 20px;
 }
 
